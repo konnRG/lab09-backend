@@ -100,10 +100,15 @@ public class EventDaoImpl implements EventDao {
         int firstIndex = (page - 1) * pageSize;
         return new PageImpl<Event>(eventList.subList(firstIndex,firstIndex+pageSize),PageRequest.of(page,pageSize),eventList.size());
     }
-
     @Override
     public Event getEvent(Long id) {
 
         return eventList.stream().filter(event -> event.getId().equals(id)).findFirst().orElse(null);
+    }
+    @Override
+    public Event save(Event event) {
+        event.setId(eventList.get(eventList.size()-1).getId()+1);
+        eventList.add(event);
+        return event;
     }
 }

@@ -21,11 +21,14 @@ public class EventDaoDblmpl implements EventDao {
     }
     @Override
     public Page<Event> getEvents(Integer pageSize, Integer page) {
-        return eventRepository.findAll(PageRequest.of(page-1, pageSize));
+        return eventRepository.findAll(PageRequest.of(page - 1, pageSize));
     }
     @Override
     public Event getEvent(Long id) {
         return eventRepository.findById(id).orElse(null);
     }
-
+    @Override
+    public Event save(Event event) {
+        return eventRepository.save(event);
+    }
 }
